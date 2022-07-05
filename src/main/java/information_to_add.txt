@@ -1,0 +1,13 @@
+FieldType class:
+---------------
+- JsonToken token
+- String fieldName
+
+================
+
+OwnJsonReader class:
+----------------
+-JsonReader reader
+----------------
++ getFieldType()
+other parasha
