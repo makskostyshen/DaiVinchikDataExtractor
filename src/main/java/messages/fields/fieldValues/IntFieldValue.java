@@ -1,9 +1,9 @@
-package arguments;
+package messages.fields.fieldValues;
 
-public class IntArgument implements Argument{
+public class IntFieldValue implements FieldValue {
     private int value;
 
-    public IntArgument(int value) {
+    public IntFieldValue(int value) {
         this.value = value;
     }
 

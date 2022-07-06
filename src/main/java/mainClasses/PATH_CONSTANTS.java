@@ -1,11 +1,11 @@
-package Additional;
+package mainClasses;
 
 public class PATH_CONSTANTS {
     private static final String folderPath =
             "C:\\Users\\maxxx\\Desktop\\DS_fundamentals\\DaiVinchikProject\\Maks_Kostyshen";
 
     private static final String jsonFileName
-            = "result2.json";
+            = "result1.json";
 
     public static final String getJsonFilePath(){
         return folderPath + "//" + jsonFileName;

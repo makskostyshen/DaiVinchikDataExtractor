@@ -1,11 +1,11 @@
-package arguments;
+package messages.fields.fieldValues;
 
 
-public class StringArgument implements Argument {
+public class StringFieldValue implements FieldValue {
 
     private String value;
 
-    public StringArgument(String value) {
+    public StringFieldValue(String value) {
         this.value = value;
     }
 
