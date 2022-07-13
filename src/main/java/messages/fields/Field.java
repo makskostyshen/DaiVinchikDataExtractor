@@ -1,18 +1,20 @@
 package messages.fields;
 
+import com.google.gson.stream.JsonToken;
 import messages.fields.fieldValues.FieldValue;
 
 public class Field {
-    FieldType fieldType;
+    FieldName fieldName;
+    JsonToken fieldType;
     FieldValue fieldValue;
 
-    public Field(FieldType fieldType, FieldValue fieldValue) {
-        this.fieldType = fieldType;
+    public Field(FieldName fieldName, FieldValue fieldValue) {
+        this.fieldName = fieldName;
         this.fieldValue = fieldValue;
     }
 
-    public String getName(){
-        return fieldType.getName();
+    public FieldName getName(){
+        return fieldName;
     }
 
     public Object getValue() {

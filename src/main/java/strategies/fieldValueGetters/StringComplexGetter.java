@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public class StringComplexGetter implements FieldValueGetter {
 
-    private JsonReader reader;
+    private final JsonReader reader;
 
     public StringComplexGetter(JsonReader reader) {
         this.reader = reader;
@@ -48,11 +48,7 @@ public class StringComplexGetter implements FieldValueGetter {
         while(reader.hasNext()){
             String name = reader.nextName();
             String currentValue = reader.nextString();
-
-//            System.out.println("before comparing:");
-//            System.out.println(name);
-//            System.out.println("text");
-//            System.out.println("\n");
+            
             if (name.equals("text")){
                 significantValue = currentValue;
             }

@@ -1,8 +1,6 @@
 package messages;
 
-import mainClasses.PATH_CONSTANTS;
-
-import java.util.List;
+import mainClasses.FILEPATH_CONSTANTS;
 
 public class Message {
 
@@ -28,7 +26,7 @@ public class Message {
     }
 
     public void setPhotoPath(String photoPath) {
-        this.photoPath = PATH_CONSTANTS.getFullPathFromPartial(photoPath);
+        this.photoPath = FILEPATH_CONSTANTS.getFullPathFromPartial(photoPath);
     }
 
     public void setText(String text) {

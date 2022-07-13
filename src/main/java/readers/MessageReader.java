@@ -2,13 +2,14 @@ package readers;
 
 import messages.fields.Field;
 import messages.Message;
+import messages.fields.FieldName;
 import strategies.messageSetters.*;
 
 import java.io.IOException;
 
 public class MessageReader {
 
-    private FieldReader fieldReader;
+    private final FieldReader fieldReader;
 
     public MessageReader(String filePath) throws IOException {
         this.fieldReader = new FieldReader(filePath);
@@ -48,16 +49,17 @@ public class MessageReader {
 
 
     private MessageSetter getSetter(Field field){
+
         switch (field.getName()){
-            case ("text"):
+            case TEXT:
                 return new setText();
-            case ("id"):
+            case ID:
                 return new setID();
-            case ("date"):
+            case DATE:
                 return new setDate();
-            case ("from"):
+            case FROM:
                 return new setFrom();
-            case ("photo"):
+            case PHOTO:
                 return new setPhotoPath();
             default:
                 return new setNothing();

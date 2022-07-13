@@ -1,21 +1,22 @@
 package mainClasses;
 
-public class PATH_CONSTANTS {
+public class FILEPATH_CONSTANTS {
+
     private static final String folderPath =
             "C:\\Users\\maxxx\\Desktop\\DS_fundamentals\\DaiVinchikProject\\Maks_Kostyshen";
 
     private static final String jsonFileName
             = "result1.json";
 
-    public static final String getJsonFilePath(){
+    public static String getJsonFilePath(){
         return folderPath + "//" + jsonFileName;
     }
 
-    public static final String getFolderPath(){
+    public static String getFolderPath(){
         return folderPath;
     }
 
-    public static final String getFullPathFromPartial(String partialPath){
+    public static String getFullPathFromPartial(String partialPath){
         return folderPath + "//" + partialPath;
     }
 }

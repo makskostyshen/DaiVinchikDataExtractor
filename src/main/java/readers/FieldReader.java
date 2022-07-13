@@ -1,8 +1,7 @@
 package readers;
 
 import com.google.gson.stream.JsonReader;
-import com.google.gson.stream.JsonToken;
-import messages.fields.FieldType;
+import messages.fields.FieldName;
 import messages.fields.Field;
 import messages.fields.fieldValues.FieldValue;
 import strategies.fieldValueGetters.*;
@@ -14,7 +13,7 @@ import java.io.IOException;
 
 public class FieldReader {
 
-    private JsonReader innerReader;
+    private final JsonReader innerReader;
 
     public FieldReader(String jsonFilePath) throws FileNotFoundException {
         innerReader = new JsonReader(new BufferedReader(new FileReader(jsonFilePath)));
@@ -55,11 +54,12 @@ public class FieldReader {
 
     public Field getNextField() throws IOException {
 
-        FieldType type = getFieldType();
-        FieldValueGetter valueGetter = getValueGetter(type);
+        FieldName fieldName = FieldName.createFieldName(innerReader.nextName());
 
+        FieldValueGetter valueGetter = getValueGetter(fieldName);
         FieldValue value = valueGetter.get();
-        return new Field(type, value);
+
+        return new Field(fieldName, value);
     }
 
     public void beginMessage() throws IOException {
@@ -71,22 +71,20 @@ public class FieldReader {
     }
 
 
-    private FieldType getFieldType() throws IOException {
-        String name = innerReader.nextName();
-        JsonToken token = innerReader.peek();
-        return new FieldType(name, token);
-    }
+    private FieldValueGetter getValueGetter(FieldName fieldName){
 
-    private FieldValueGetter getValueGetter(FieldType fieldType){
-        String typeString = fieldType.getName();
-        if ("date".equals(typeString) || "from".equals(typeString) || "photo".equals(typeString)) {
-            return new StringSimpleGetter(innerReader);
-        } else if ("text".equals(typeString)) {
-            return new StringComplexGetter(innerReader);
-        } else if ("id".equals(typeString)) {
-            return new IntSimpleGetter(innerReader);
+        switch (fieldName){
+            case DATE:
+            case PHOTO:
+            case FROM:
+                return new StringSimpleGetter(innerReader);
+            case TEXT:
+                return new StringComplexGetter(innerReader);
+            case ID:
+                return new IntSimpleGetter(innerReader);
+            default:
+                return new EmptyGetter(innerReader);
         }
-        return new EmptyGetter(innerReader);
     }
 
 }
