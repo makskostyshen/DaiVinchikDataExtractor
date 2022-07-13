@@ -6,7 +6,7 @@ public class FILEPATH_CONSTANTS {
             "C:\\Users\\maxxx\\Desktop\\DS_fundamentals\\DaiVinchikProject\\Maks_Kostyshen";
 
     private static final String jsonFileName
-            = "result1.json";
+            = "result.json";
 
     public static String getJsonFilePath(){
         return folderPath + "//" + jsonFileName;

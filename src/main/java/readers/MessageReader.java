@@ -2,7 +2,6 @@ package readers;
 
 import messages.fields.Field;
 import messages.Message;
-import messages.fields.FieldName;
 import strategies.messageSetters.*;
 
 import java.io.IOException;

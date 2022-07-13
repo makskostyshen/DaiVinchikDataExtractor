@@ -25,19 +25,12 @@ public class FieldReader {
         String name1 = innerReader.nextName();
         String value1 = innerReader.nextString();
 
-        System.out.println(name1 + " " + value1);
-
         String name2 = innerReader.nextName();
         String value2 = innerReader.nextString();
-
-        System.out.println(name2 + " " + value2);
 
         String name3 = innerReader.nextName();
         int value3 = innerReader.nextInt();
 
-        System.out.println(name3 + " " + value3);
-
-        System.out.println(innerReader.peek());
         innerReader.nextName();
         innerReader.beginArray();
     }
