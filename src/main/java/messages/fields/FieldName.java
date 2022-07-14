@@ -1,29 +1,19 @@
 package messages.fields;
 
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Locale;
-import java.util.Set;
-import java.util.stream.Collectors;
+import java.util.*;
 
 public enum FieldName {
 
     ID("id"),
-    TYPE("type"),
     DATE("date"),
-    FROM("from"),
-    PHOTO("photo"),
+    SENDER("from"),
+    PHOTO_PATH("photo"),
     TEXT("text"),
-    EMPTY("empty");
+    OTHER("empty");
 
 
     private final String value;
 
-    private static final Set<String> valuesSet = new HashSet<>(
-            Arrays.stream(values())
-                    .map(fieldName -> fieldName.getValue())
-                    .collect(Collectors.toSet())
-    );
 
     FieldName (String value){
         this.value = value;
@@ -35,11 +25,20 @@ public enum FieldName {
 
     public static FieldName createFieldName(String value){
 
-        if (valuesSet.contains(value)){
-            return valueOf(value.toUpperCase(Locale.ROOT));
-        }
+        FieldName fieldName = fieldNameGetter.get(value);
 
-        else return FieldName.EMPTY;
+        if (fieldName == null){
+           return FieldName.OTHER;
+        }
+        else return fieldName;
     }
+
+    private static final Map<String, FieldName> fieldNameGetter = new HashMap<String, FieldName>(){{
+        put("id", FieldName.ID);
+        put("date", FieldName.DATE);
+        put("from", FieldName.SENDER);
+        put("photo", FieldName.PHOTO_PATH);
+        put("text", FieldName.TEXT);
+    }};
 
 }

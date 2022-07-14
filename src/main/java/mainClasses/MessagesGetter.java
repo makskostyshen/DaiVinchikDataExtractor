@@ -7,9 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Processor {
+public class MessagesGetter {
 
-    public List<Message> process() throws IOException {
+    public List<Message> getMessages() throws IOException {
 
         List<Message> messages = new ArrayList<>();
 

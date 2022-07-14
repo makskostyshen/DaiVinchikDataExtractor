@@ -68,8 +68,8 @@ public class FieldReader {
 
         switch (fieldName){
             case DATE:
-            case PHOTO:
-            case FROM:
+            case PHOTO_PATH:
+            case SENDER:
                 return new StringSimpleGetter(innerReader);
             case TEXT:
                 return new StringComplexGetter(innerReader);

@@ -56,9 +56,9 @@ public class MessageReader {
                 return new setID();
             case DATE:
                 return new setDate();
-            case FROM:
+            case SENDER:
                 return new setFrom();
-            case PHOTO:
+            case PHOTO_PATH:
                 return new setPhotoPath();
             default:
                 return new setNothing();
