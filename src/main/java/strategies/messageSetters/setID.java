@@ -6,6 +6,6 @@ import messages.Message;
 public class setID implements MessageSetter {
     @Override
     public void set(Message message, Field field) {
-        message.setID((Integer) field.getValue());
+        message.setId((Integer) field.getValue());
     }
 }

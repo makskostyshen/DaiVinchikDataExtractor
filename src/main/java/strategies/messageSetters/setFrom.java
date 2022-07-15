@@ -6,6 +6,6 @@ import messages.Message;
 public class setFrom implements MessageSetter {
     @Override
     public void set(Message message, Field field) {
-        message.setFrom((String) field.getValue());
+        message.setSender((String) field.getValue());
     }
 }

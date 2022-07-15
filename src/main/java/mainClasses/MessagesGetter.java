@@ -13,7 +13,7 @@ public class MessagesGetter {
 
         List<Message> messages = new ArrayList<>();
 
-        MessageReader messageReader = new MessageReader(FILEPATH_CONSTANTS.getJsonFilePath());
+        MessageReader messageReader = new MessageReader(FilePathConstants.getJsonFilePath());
         messageReader.open();
 
         while (messageReader.hasNextMessage()){

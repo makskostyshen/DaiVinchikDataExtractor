@@ -1,6 +1,6 @@
 package mainClasses;
 
-public class FILEPATH_CONSTANTS {
+public class FilePathConstants {
 
     private static final String folderPath =
             "C:\\Users\\maxxx\\Desktop\\DS_fundamentals\\DaiVinchikProject\\Maks_Kostyshen";
@@ -12,11 +12,11 @@ public class FILEPATH_CONSTANTS {
         return folderPath + "//" + jsonFileName;
     }
 
-    public static String getFolderPath(){
-        return folderPath;
-    }
-
     public static String getFullPathFromPartial(String partialPath){
         return folderPath + "//" + partialPath;
+    }
+
+    public static String getFolderName(){                       ///////////////need to be changed
+        return "maks_kostyshen";
     }
 }
