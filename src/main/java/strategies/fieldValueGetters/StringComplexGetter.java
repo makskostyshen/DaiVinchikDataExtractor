@@ -7,6 +7,7 @@ import messages.fields.fieldValues.StringFieldValue;
 
 import java.io.IOException;
 
+
 public class StringComplexGetter implements FieldValueGetter {
 
     private final JsonReader reader;
@@ -14,6 +15,7 @@ public class StringComplexGetter implements FieldValueGetter {
     public StringComplexGetter(JsonReader reader) {
         this.reader = reader;
     }
+
 
     @Override
     public FieldValue get() throws IOException {
@@ -31,12 +33,14 @@ public class StringComplexGetter implements FieldValueGetter {
 
         while(reader.hasNext()){
             if(reader.peek() == JsonToken.STRING){
-                builder.append(reader.nextString());
+                String nextString = reader.nextString();
+                builder.append(nextString);
             }
             else{
                 builder.append(getStringFromObject());
             }
         }
+
         reader.endArray();
         return new StringFieldValue(builder.toString());
     }

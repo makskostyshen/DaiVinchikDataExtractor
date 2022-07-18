@@ -18,7 +18,10 @@ public final class SQLQueries {
                 "photo_path TEXT," +
                 "mess_text TEXT," +
                 "PRIMARY KEY (id)" +
-            ");";
+            ");"+
+            "ALTER TABLE " + TABLE_NAME +
+                    "    [CHARACTER SET utf8mb3] " +
+                    "    [COLLATE utf8mb3_general_ci]";
 
     public static final String INSERT_MESSAGE =
             "INSERT INTO " + TABLE_NAME +

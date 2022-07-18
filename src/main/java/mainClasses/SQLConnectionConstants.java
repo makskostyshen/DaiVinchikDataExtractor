@@ -10,4 +10,6 @@ public class SQLConnectionConstants {
     public static final String TABLE_NAME = FilePathConstants.getFolderName();
 
     public static final String PASSWORD = "okcsonic";
+
+//    characterEncoding=CP1251&
 }

@@ -2,8 +2,11 @@ package mainClasses;
 
 import messages.Message;
 
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.List;
+import java.util.Properties;
 
 public class Connector {
 
@@ -11,11 +14,20 @@ public class Connector {
 
     public Connector(){}
 
-    public void connect() throws SQLException {
+    public void connect() throws SQLException{
         connection = DriverManager.getConnection(
                 SQLConnectionConstants.URL,
                 SQLConnectionConstants.USERNAME,
                 SQLConnectionConstants.PASSWORD);
+
+        connection.setClientInfo("autoReconnect", "true");
+        connection.setClientInfo("useSSL", "false");
+        connection.setClientInfo("characterEncoding", "CP1251");
+        connection.setClientInfo("useUnicode", "true");
+
+
+
+
     }
 
     public void close() throws SQLException {
@@ -81,6 +93,14 @@ public class Connector {
         statement.setInt(1, message.getId());
         statement.setString(2, message.getDate());
         statement.setString(3, message.getSender());
+        System.out.println(
+                new String(message.getSender().getBytes(StandardCharsets.UTF_8))
+        );
+
+//        String
+//
+//        System.out.println(new String(value.getBytes(fromEncoding), toEncoding));
+
         statement.setString(4, message.getPhotoPath());
         statement.setString(5, message.getText());
     }
