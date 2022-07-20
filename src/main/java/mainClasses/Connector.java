@@ -2,11 +2,9 @@ package mainClasses;
 
 import messages.Message;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.sql.*;
 import java.util.List;
-import java.util.Properties;
+
 
 public class Connector {
 
@@ -17,17 +15,7 @@ public class Connector {
     public void connect() throws SQLException{
         connection = DriverManager.getConnection(
                 SQLConnectionConstants.URL,
-                SQLConnectionConstants.USERNAME,
-                SQLConnectionConstants.PASSWORD);
-
-        connection.setClientInfo("autoReconnect", "true");
-        connection.setClientInfo("useSSL", "false");
-        connection.setClientInfo("characterEncoding", "CP1251");
-        connection.setClientInfo("useUnicode", "true");
-
-
-
-
+                SQLConnectionConstants.PROPERTIES);
     }
 
     public void close() throws SQLException {
@@ -38,7 +26,7 @@ public class Connector {
         return connection;
     }
 
-    public boolean containsTable(String tableName) throws SQLException {
+    public boolean notContainsTable(String tableName) throws SQLException {
 
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(SQLQueries.SHOW_TABLES);
@@ -52,27 +40,20 @@ public class Connector {
             }
         }
         statement.close();
-        return hasThisTable;
+        return !hasThisTable;
     }
 
     public void loadMessages(List<Message> messages) throws SQLException {
 
-        String name = SQLConnectionConstants.TABLE_NAME;
+        String tableName = SQLConnectionConstants.TABLE_NAME;
 
-        if (containsTable(name)){
-//            createTable();
-            insertMessages(messages);
+        if (notContainsTable(tableName)){
+            createTable();
+            System.out.println("not contains");
         }
-    }
 
-    private void insertMessages(List<Message> messages) throws SQLException {
-
-        PreparedStatement statement =
-                connection.prepareStatement(SQLQueries.INSERT_MESSAGE);
-
-        for (int i = 0; i < 2; i++){
-            loadMessage(messages.get(i), statement);
-        }
+        SQLLoader loader = new SQLLoader();
+        loader.loadMessages(messages, connection, tableName);
     }
 
     public void createTable() throws SQLException {
@@ -82,28 +63,5 @@ public class Connector {
 
         statement.close();
     }
-
-    public void loadMessage(Message message, PreparedStatement statement) throws SQLException {
-
-        upgradeQuery(statement, message);
-        statement.executeUpdate();
-    }
-
-    private void upgradeQuery( PreparedStatement statement, Message message) throws SQLException {
-        statement.setInt(1, message.getId());
-        statement.setString(2, message.getDate());
-        statement.setString(3, message.getSender());
-        System.out.println(
-                new String(message.getSender().getBytes(StandardCharsets.UTF_8))
-        );
-
-//        String
-//
-//        System.out.println(new String(value.getBytes(fromEncoding), toEncoding));
-
-        statement.setString(4, message.getPhotoPath());
-        statement.setString(5, message.getText());
-    }
-
 
 }

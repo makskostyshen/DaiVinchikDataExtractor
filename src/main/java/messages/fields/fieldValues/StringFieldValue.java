@@ -1,13 +1,13 @@
 package messages.fields.fieldValues;
 
 
-import mainClasses.Encoder;
+import strategies.fieldValueGetters.Encoder;
 
 import java.io.UnsupportedEncodingException;
 
 public class StringFieldValue implements FieldValue {
 
-    private String value;
+    private final String value;
 
     public StringFieldValue(String value) throws UnsupportedEncodingException {
         Encoder encoder = new Encoder();

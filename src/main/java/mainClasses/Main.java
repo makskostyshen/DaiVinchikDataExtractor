@@ -12,15 +12,11 @@ public class Main {
         try{
             MessagesGetter getter = new MessagesGetter();
             List<Message> messages = getter.getMessages();
-
-//            printMessages(messages);
+            //printMessages(messages);
 
             connector.connect();
-            System.out.println(connector.getConnection().getClientInfo("characterEncoding"));
             connector.loadMessages(messages);
-//
 
-//            System.out.println(connector.getConnection().getClientInfo("characterEncoding"));
 
         }
         catch (Exception e){
